@@ -5,6 +5,8 @@ var mainstage = {
         //that's where we will load
         //load the bird sprite
         game.load.image('bird', 'assets/bird.png');
+        // load pipe sprtie
+        game.load.image('pipe', 'assets/pipe.png');
     },
     create: function () {
         //this function is called after the preload function
@@ -22,13 +24,18 @@ var mainstage = {
         //call 'jump' function when spacebar is pressed
         var spaceBar = game.input.keyboard.addKey(phaser.keyboard.SPACEBAR);
         spaceBar.ondown.add(this.jump, this);
+        //create an empty gruop
+        this.pipes = game.add.group();
+        
+        //timer for pipes
+        this.timer = game.time.events.loop(1500, this.addrowofpipes, this);
     },
     update: function () {
         //This functiobn is called 60 times per second
         //It contains the games logic
         
         //call the restartgame function
-        if (this.bird.y <0 || this.bird.y >490)
+        if (this.bird.y < 0 || this.bird.y > 490)
             this.restaertgame();
     },
     
@@ -37,10 +44,37 @@ var mainstage = {
         this.bird.body.velocity.y = 350;
     },
    //restart game 
-    restartgame: function() {
+    restartgame: function () {
         //start the 'main' sate which resarts game
         game.state.start('main');
-    }
+    },
+    //add a pipe
+    addonepipe: function(x, y) {
+        //creat a pipe at the position x and y
+        var pipe = game.add.sprite(x, y, 'pipe');
+        
+        //add pipe to group
+        this.pipes.add(pipe);
+        //enable pipe physics
+        game.physics.arcade.enable(pipe);
+        //add velocty to the pipe to make it move left
+        pipe.body.velocity.x = -200;
+        //automatically kill pipe when it is no longer visalbe 
+        pipe.checkWorldBounds = true;
+        pipe.outOfBoundsKill = true;
+    },
+    
+    //many pipe
+    addrowofpipes: function() {
+        //randomly pick a number between 1 and 5
+        // this will be the hole position in the pipe
+        
+        var hole = Math.floor(Math.random() * 5) + 1;
+        //add 6 pipes
+        for (var i = 0; i < 8; i++)
+            if (i != hole && i != hole +1)
+                this.addonepipe(400, i * 60 + 10);
+    },
 };
 //initialise phaser and create a 400px by 490px game
 var game = new phaser.game(400, 490);
