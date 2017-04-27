@@ -1,5 +1,5 @@
 //create 'main' state that will contain the game
-var mainstage = {
+var mainState = {
     preload: function () {
         //this function will be executed at the beginning
         //that's where we will load
@@ -28,14 +28,14 @@ var mainstage = {
         this.pipes = game.add.group();
         
         //timer for pipes
-        this.timer = game.time.events.loop(1500, this.addrowofpipes, this);
+        this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
     },
     update: function () {
         //This functiobn is called 60 times per second
         //It contains the games logic
         
         //call the restartgame function
-        if (this.bird.y < 0 || this.bird.y > 490)
+        if (this.bird.y < 0 || this.bird.y > 490) 
             this.restaertgame();
     },
     
@@ -49,7 +49,7 @@ var mainstage = {
         game.state.start('main');
     },
     //add a pipe
-    addonepipe: function(x, y) {
+    addOnePipe: function(x, y) {
         //creat a pipe at the position x and y
         var pipe = game.add.sprite(x, y, 'pipe');
         
@@ -65,7 +65,7 @@ var mainstage = {
     },
     
     //many pipe
-    addrowofpipes: function() {
+    addRowofpipes: function() {
         //randomly pick a number between 1 and 5
         // this will be the hole position in the pipe
         
