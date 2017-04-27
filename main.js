@@ -14,7 +14,7 @@ var mainState = {
         //change the background color of the game to blue -for now?
         game.stage.backgroundColor = '#71c5cf';
         //set the physics for game
-        game.physics.startsystem(phaser.physics.ARCADE);
+        game.physics.startsystem(Phaser.Physics.ARCADE);
         //Display the bird at the position of x = 100 and y = 245
         this.bird = game.add.sprite(100, 245, 'bird');
         //add physics to the bird, need for movement, gravity and collisions
@@ -22,8 +22,9 @@ var mainState = {
         //add gravity to bird
         this.bird.body.gravity.y = 1000;
         //call 'jump' function when spacebar is pressed
-        var spaceBar = game.input.keyboard.addKey(phaser.keyboard.SPACEBAR);
-        spaceBar.ondown.add(this.jump, this);
+        var spaceBar = game.input.keyboard.addKey(
+                        Phaser.Keyboard.SPACEBAR);
+        spaceBar.onDown.add(this.jump, this);
         //create an empty gruop
         this.pipes = game.add.group();
         
@@ -35,8 +36,8 @@ var mainState = {
         //It contains the games logic
         
         //call the restartgame function
-        if (this.bird.y < 0 || this.bird.y > 490) 
-            this.restaertgame();
+        if (this.bird.y < 0 || this.bird.y > 490)
+        this.restaertgame();
     },
     
     jump: function () {
@@ -72,12 +73,12 @@ var mainState = {
         var hole = Math.floor(Math.random() * 5) + 1;
         //add 6 pipes
         for (var i = 0; i < 8; i++)
-            if (i != hole && i != hole +1)
+            if (i != hole && i != hole + 1)
                 this.addonepipe(400, i * 60 + 10);
     },
 };
 //initialise phaser and create a 400px by 490px game
-var game = new phaser.game(400, 490);
+var game = new Phaser.Game(400, 490);
 //add the main state and call it main
 game.state.add('main', mainstate);
 //start the state to actually start the game
