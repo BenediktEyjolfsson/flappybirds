@@ -1,17 +1,17 @@
 //create 'main' state that will contain the game
 var mainState = {
-    preload: function() {
+    preload: function () {
         //this function will be executed at the beginning
         //that's where we will load the images and sounds
         //load the bird sprite
         game.load.image('bird', 'assets/bird.png');
     },
     
-    create: function() {
+    create: function () {
         //this function is called after the preload function
         //here we setup the game, display sprites, etc.
         //change teh background colour of the game to blue
-        game.state.backgroundColor = '#71c5cf'
+        game.state.backgroundColor = '#71c5cf';
         
         //set the physics system
         game.physics.startSystem(Phaser.physics.ARCADE);
@@ -32,24 +32,24 @@ var mainState = {
         spaceBar.onDown.add(this.jump, this);
     },
     
-    update: function() {
+    update: function () {
         // This function is called 60 times per second
         ///if the 'bird' is out of screen (too high or low)
         //call the 'restartGame' function
         if (this.bird.y < 0 || this.bird.y > 490)
-            this.restartGame();
+        this.restartGame();
         //It contains the game's logic
     },
     //make the bird jump
-    jump: function() {
+    jump: function () {
       //add a vertial velocity to the bird
-        this.bird.body.velocity.y = -350; 
+        this.bird.body.velocity.y = -350;
     },
     //restart the game
-    restartGame: function() {
+    restartGame: function () {
       //start the 'main' state, which restarts the game
         game.state.start('main');
-    },
+    }
 };
 
 //Initialize Phaser and create a 400px by 490px game
