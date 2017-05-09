@@ -6,8 +6,8 @@ var mainState = {
     //That's where we load the images and sound
 
     //Load the bird sprite and sound
-    game.load.image('bird', 'assets/bird.png');
-    game.load.image('pipe', 'assets/pipe.png');
+    Game.load.image('bird', 'assets/bird.png');
+    Game.load.image('pipe', 'assets/pipe.png');
 
   },
 
@@ -15,11 +15,11 @@ var mainState = {
     //This function is called after the preload function
     //Here we setup the game, display sprites, etc...
 
-    //Change the background colour o the game to blue - for now!
-    game.stage.backgroundColor = '#c134eb';
+    //Change the background colour of the game to a random - for now!
+    Game.stage.backgroundColor = '#c134eb';
 
     //Set the physics for the game
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+    Game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //Display the bird as the position of x=100 and y=245
     this.bird = game.add.sprite(100, 245, 'bird');
@@ -29,7 +29,7 @@ var mainState = {
 
     //Add physics to the bird
     //Needed for: movement, gravity, collisions, etc...
-    game.physics.arcade.enable(this.bird);
+    Game.physics.arcade.enable(this.bird);
 
     //Add gravity to the bird to ake it fall
     this.bird.body.gravity.y = 1000;
@@ -47,13 +47,6 @@ var mainState = {
     //Jump sound
     this.jumpSound = game.add.audio('jump');
 
-
-
-    //Score
-    this.score = 0;
-    this.labelScore = game.add.text(20, 20, "0", {
-      font: "30px Mono",
-      fill: "#ffffff"
     });
   },
 
